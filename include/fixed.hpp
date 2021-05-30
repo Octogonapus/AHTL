@@ -28,16 +28,16 @@ namespace AHTL{
   template <typename T>
     void FixedHistogram<T>::BuildHistogramPrivate()
     {
+        int num_thread = omp_get_num_threads();
       if(omp_in_parallel()) // Do not parallelize
       {
-        std::cout<<num_thread<<std::endl;
+        std::cout<< num_thread <<std::endl;
         for(int i = 0; i < Histogram<T>::data_size_; i++)
           Histogram<T>::bin_[(unsigned int)(((Histogram<T>::data_[i]) - bin_base_) / bin_width_)]++;
       }
       else
       {
-        int num_thread = omp_get_num_threads();
-        std::cout<<num_thread<<std::endl;
+        std::cout<< num_thread <<std::endl;
         for(int i = 0; i < Histogram<T>::data_size_; i++)
           Histogram<T>::bin_[(unsigned int)(((Histogram<T>::data_[i]) - bin_base_) / bin_width_)]++;
       }
@@ -49,7 +49,7 @@ namespace AHTL{
     hist_uniform_float_simd_unrolled_4(data_, bin_base_, bin_width_, data_size_, bin_, num_bins_);  
   }
 #else
-  void FixedHistogram<float>::BuildHistogramPrivate()
+  template<> void FixedHistogram<float>::BuildHistogramPrivate()
   {
       if(omp_in_parallel()) // Do not parallelize
       {
@@ -88,11 +88,11 @@ namespace AHTL{
     void FixedHistogram<T>::BuildHistogramShared()
     {
       int i;
-      for(i = 0; i < data_size_; i++)
-        __sync_fetch_and_add(&bin_[(int)(((data_[i]) - bin_base_) / bin_width_)], 1);
+      for(i = 0; i < this->data_size_; i++)
+        __sync_fetch_and_add(&(this->bin_)[(int)(((this->data_[i]) - bin_base_) / bin_width_)], 1);
     }
 
-  void FixedHistogram<float>::BuildHistogramShared()
+  template<> void FixedHistogram<float>::BuildHistogramShared()
   {
     hist_uniform_float_atomic(data_, bin_base_, bin_width_, data_size_, bin_);  
   }

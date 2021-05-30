@@ -11,12 +11,12 @@ namespace AHTL{
 
 
 #ifdef SIMD
-  void VariableHistogram<float>::BuildHistogramLinearSearch()
+  template<> void VariableHistogram<float>::BuildHistogramLinearSearch()
   {
      hist_linear_float_simd(data_, boundaries_, data_size_, (unsigned int *)bin_, num_bins_);
   }
   
-  void VariableHistogram<float>::BuildHistogramBinarySearch()
+  template<> void VariableHistogram<float>::BuildHistogramBinarySearch()
   {
     float * tree = hist_build_tree(boundaries_, num_bins_);
  
@@ -25,7 +25,7 @@ namespace AHTL{
     _mm_free(tree);
   }
 
-  void VariableHistogram<float>::BuildHistogramPartitionSearch()
+  template<> void VariableHistogram<float>::BuildHistogramPartitionSearch()
   {
 
   }

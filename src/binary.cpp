@@ -604,7 +604,7 @@ int hist_binary_float
 
   int HEIGHT = i;
 
-  if(remainder = ((unsigned long long int)data) % (VLEN * sizeof(float)))
+  if((remainder = ((unsigned long long int)data) % (VLEN * sizeof(float))))
   {
     unsigned int i;
     start = (VLEN - (remainder / sizeof(float)));

@@ -116,7 +116,7 @@ int hist_linear_float_simd
 		size_t start = 0;
 		unsigned int i;
 		int j;
-		if(remainder = ((unsigned long long int)data) % (VLEN * sizeof(float)))
+		if((remainder = ((unsigned long long int)data) % (VLEN * sizeof(float))))
 		{
 				unsigned int i;
 				start = (VLEN - (remainder / sizeof(float)));

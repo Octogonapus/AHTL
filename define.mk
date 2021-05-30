@@ -1,10 +1,10 @@
 
-CC = icc
-CXX = icpc
+CC = clang
+CXX = clang++
 
-CFLAGS = -fast -openmp -ipo
+CFLAGS = -O3 -Ofast -fopenmp -march=native
 
-LDFLAGS = -openmp -ipo -lm -fPIC
+LDFLAGS = -lm -fPIC -fopenmp -flto
 
 AR = ar
 

@@ -1,0 +1,6 @@
+.vscode
+*.o
+*.so
+*.so.0
+*.a
+test/unit/unittest

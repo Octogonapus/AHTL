@@ -51,6 +51,7 @@ int main(void)
   std::cout << "--- PRIVATE HISTOGRAM ---" << std::endl;
 
   x.BuildHistogramPrivate();
+  
 
   TIMER_CHECK("Histogram")
   
@@ -133,5 +134,5 @@ int main(void)
 
   y.CleanResult();
 
-  delete data;
+  delete[] data;
 }

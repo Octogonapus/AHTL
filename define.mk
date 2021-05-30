@@ -1,8 +1,8 @@
 
-CC = clang
-CXX = clang++
+CC = gcc
+CXX = g++
 
-CFLAGS = -O3 -Ofast -fopenmp -march=native
+CFLAGS = -O3 -Ofast -fopenmp -march=native -fPIC
 
 LDFLAGS = -lm -fPIC -fopenmp -flto
 

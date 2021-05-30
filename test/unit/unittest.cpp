@@ -34,17 +34,17 @@ int main(void)
     result_compare[i] = 0;
   for(i = 0; i < count; i++)
     result_compare[(size_t)(data[i])]++;
-  
+
   TIMER_CHECK("Data & result init")
   
   AHTL::FixedHistogram<float> x = AHTL::FixedHistogram<float>(M, 0, 1);
-  AHTL::VariableHistogram<float> y = AHTL::VariableHistogram<float>(M);
+  // AHTL::VariableHistogram<float> y = AHTL::VariableHistogram<float>(M);
   
   TIMER_CHECK("Instance init")
   
   x.SetData(data, N);
-  y.SetData(data, N);
-  y.InitFixedWidthBoundaries(0,1);
+  // y.SetData(data, N);
+  // y.InitFixedWidthBoundaries(0,1);
 
   TIMER_CHECK("Set data")
 
@@ -106,33 +106,33 @@ int main(void)
 
   TIMER_CHECK("Comparison and clean")
 */
-  std::cout << "--- BINARY HISTOGRAM ---" << std::endl;
+  // std::cout << "--- BINARY HISTOGRAM ---" << std::endl;
 
-  y.BuildHistogramBinarySearch();
+  // y.BuildHistogramBinarySearch();
 
-  TIMER_CHECK("Histogram")
+  // TIMER_CHECK("Histogram")
 
-  y.ExportResult(result);
+  // y.ExportResult(result);
   
-  TIMER_CHECK("Export Result")
+  // TIMER_CHECK("Export Result")
 
-  if (memcmp(result, result_compare, sizeof(int) * M) == 0)
-    std::cout << "--correct" << std::endl;
-  else
-  {
-    std::cout << "--incorrect" << std::endl;
-    for(int i = 0; i < M; i++)
-      if(result[i] != result_compare[i]) 
-        std::cout<<i<<"th element"<<result[i]<<" should be "<<result_compare[i]<<std::endl;
-    int x = 0, y = 0;
-    for(int i = 0; i < M; i++)
-    {
-      x+=result[i]; y+=result_compare[i];
-    }
-    std::cout<<x<<" "<<y<<std::endl;
-  }
+  // if (memcmp(result, result_compare, sizeof(int) * M) == 0)
+  //   std::cout << "--correct" << std::endl;
+  // else
+  // {
+  //   std::cout << "--incorrect" << std::endl;
+  //   for(int i = 0; i < M; i++)
+  //     if(result[i] != result_compare[i]) 
+  //       std::cout<<i<<"th element"<<result[i]<<" should be "<<result_compare[i]<<std::endl;
+  //   int x = 0, y = 0;
+  //   for(int i = 0; i < M; i++)
+  //   {
+  //     x+=result[i]; y+=result_compare[i];
+  //   }
+  //   std::cout<<x<<" "<<y<<std::endl;
+  // }
 
-  y.CleanResult();
+  // y.CleanResult();
 
   delete[] data;
 }
